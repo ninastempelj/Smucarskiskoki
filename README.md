@@ -17,4 +17,4 @@ Zajela bom sledeče podatke za vsako tekmo svetovnega pokala:
 * Kateri skakalec ima najdaljši povprečni skok?
 * Ali na domači skakalnici skakalci skačejo bolje kot sicer?
 * Kakšni bi bili rezultati svetovnega pokala, če bi štele le dolžine skokov?
-* Ali na ocene sodnikov vpliva nacionalnost tekmovalca?
+* V katerem delu kariere so tekmovalci najuspešnejši?
