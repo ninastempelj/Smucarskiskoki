@@ -32,7 +32,8 @@ vzorec_tekmovalca = re.compile(r'<td class=.i\d. align=.right.>&nbsp;(?P<uvrstit
                                r'<td .*?</td>\s'\
                                r'<td class=.i\d. align=.right.>&nbsp;(?P<id_tekmovalca>\d+?)</td>\s'\
                                r'<td class=.i\d.><a href=".*?">(?P<ime>.*?)</a>&nbsp;</td>\s'\
-                               r'<td .*?</td>\s<td class=.*?>(?P<nacionalnost>\w+?)&nbsp;</td>\s'\
+                               r'<td class=.*?>(?P<letnica>\d+?)&nbsp;</td>\s'\
+                               r'<td class=.*?>(?P<nacionalnost>\w+?)&nbsp;</td>\s'\
                                r'<td class=.*?>&nbsp;(?P<dolzina1>.*?)</td>\s'\
                                r'<td .*?</td>\s<td class=.*?>&nbsp;(?P<dolzina2>.*?)</td>\s'\
                                r'<td .*?</td>\s<td class=.*?>&nbsp;(?P<tocke>.*?)</td>')
@@ -60,11 +61,13 @@ for tekma in tekme:
         mesto = tekmovalec.groupdict()
         id_cloveka = mesto['id_tekmovalca']
         ime_cloveka = mesto.pop('ime')
+        letnica_cloveka = mesto.pop('letnica')
         nacionalnost_cloveka = mesto.pop('nacionalnost')
 
         tekmovalci[id_cloveka] = {'id_tekmovalca' : id_cloveka,
                                   'ime' : uredi_ime(ime_cloveka),
                                   'nacionalnost' : nacionalnost_cloveka
+                                  'letnica' : letnica_cloveka
                                   }
         mesto['id_tekme'] = ta_tekma
         uvrstitve += [mesto]
@@ -76,7 +79,7 @@ idji_priz = list(prizorisca)
 seznam_slovarjev_prizorisc =[prizorisca[idjek] for idjek in idji_priz]
 
 
-orodja.zapisi_tabelo(seznam_slovarjev_tekmovalcev, ['id_tekmovalca', 'ime', 'nacionalnost'], 'podatki/csv_tekmovalci.csv')
+orodja.zapisi_tabelo(seznam_slovarjev_tekmovalcev, ['id_tekmovalca', 'ime', 'nacionalnost', 'letnica'], 'podatki/csv_tekmovalci.csv')
 orodja.zapisi_tabelo(uvrstitve,['id_tekme', 'id_tekmovalca', 'uvrstitev', 'dolzina1', 'dolzina2', 'tocke'], 'podatki/csv_uvrstitve.csv')
 orodja.zapisi_tabelo(tekmovanja,['id_tekme', 'id_prizorisca', 'datum', 'sezona'], 'podatki/csv_tekmovanja.csv')
 orodja.zapisi_tabelo(seznam_slovarjev_prizorisc, ['id_prizorisca', 'kraj', 'država'], 'podatki/csv_prizorisca.csv')           
